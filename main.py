@@ -28,22 +28,32 @@ class Ui_MyGitWidget(object):
 
 
 class YellowCircles(QMainWindow, Ui_MyGitWidget):
-  def __init__(self):
-    super(YellowCircles, self).__init__()
-    self.setupUi()
-    self.retranslateUi()
+    def __init__(self):
+        super(YellowCircles, self).__init__()
+        self.setupUi(self)
+        self.retranslateUi(self)
 
-    self.drawButton.clicked.connect(self.draw_yellow_circle)
+        self.go_draw = False
 
-  def draw_yellow_circle(self):
-    width, height = self.geometry().width(), self.geometry().height()
-    random_color = (randint(0, 255), randint(0, 255), randint(0, 255))
-    random_position = (randint(0, width), randint(0, height))
-    random_diameter = randint(30, 90)
+        self.drawButton.clicked.connect(self.draw_yellow_circle)
 
-    painter = QPainter(self)
-    painter.setPen(QColor(*random_color))
-    painter.drawEllipse(*random_position, random_diameter, random_diameter)
+    def draw_yellow_circle(self):
+        self.go_draw = True
+        self.update()
+
+    def paintEvent(self, event):
+        if self.go_draw:
+            self.go_draw = False
+            width, height = self.geometry().width(), self.geometry().height()
+            random_color = (randint(0, 255), randint(0, 255), randint(0, 255))
+            random_position = [randint(0, width), randint(0, height)]
+            random_diameter = randint(64, 90)
+
+            painter = QPainter(self)
+            painter.setBrush(QColor(*random_color))
+            painter.drawEllipse(*random_position, random_diameter, random_diameter)
+
+        return super(YellowCircles, self).paintEvent(event)
 
 
 if __name__ == '__main__':
