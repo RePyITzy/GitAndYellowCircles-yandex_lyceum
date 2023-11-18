@@ -20,7 +20,7 @@ class YellowCircles(QMainWindow):
 
     painter = QPainter(self)
     painter.setPen(Qt.Yellow)
-    painter.drawEllipse(*random_position, *random_diameter)
+    painter.drawEllipse(*random_position, random_diameter, random_diameter)
 
 
 if __name__ == '__main__':
