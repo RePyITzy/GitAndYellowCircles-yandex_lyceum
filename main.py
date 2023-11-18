@@ -7,10 +7,10 @@ from random import randint
 import sys
 
 
-class YellowCircles(QMainWindow, Ui_MyGitWidget):
+class YellowCircles(QMainWindow):
     def __init__(self):
         super(YellowCircles, self).__init__()
-        uic.loadUi('UI.ui')
+        uic.loadUi('UI.ui', self)
 
         self.go_draw = False
 
@@ -28,7 +28,7 @@ class YellowCircles(QMainWindow, Ui_MyGitWidget):
             random_diameter = randint(64, 90)
 
             painter = QPainter(self)
-            painter.setBrush(Qt.Yellow)
+            painter.setBrush(QColor(255, 255, 0))
             painter.drawEllipse(*random_position, random_diameter, random_diameter)
 
         return super(YellowCircles, self).paintEvent(event)
