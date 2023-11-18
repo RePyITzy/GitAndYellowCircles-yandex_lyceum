@@ -1,8 +1,9 @@
-from PyQt5.QtWidgets import QMainWindow
+from PyQt5.QtWidgets import QMainWindow, QApplication
 from PyQt5.QtGui import QPainter, Qt
 from PyQt5 import uic
 
 from random import randint
+import sys
 
 
 class YellowCircles(QMainWindow):
@@ -20,3 +21,10 @@ class YellowCircles(QMainWindow):
     painter = QPainter(self)
     painter.setPen(Qt.Yellow)
     painter.drawEllipse(*random_position, *random_diameter)
+
+
+if __name__ == '__main__':
+  application = QApplication(sys.argv)
+  task = YellowCircles()
+  task.show()
+  sys.exit(application.exec_())
